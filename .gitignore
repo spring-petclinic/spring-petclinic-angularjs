@@ -1,7 +1,10 @@
-target/*
 .settings/*
 .classpath
 .project
 .idea
 *.iml
-/target
+
+target/
+
+bower_components/
+node_modules/
