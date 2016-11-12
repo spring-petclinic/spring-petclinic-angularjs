@@ -9,7 +9,7 @@
 	cd spring-petclinic
 	./mvnw clean install
 	cd spring-petclinic-server
-	./mvnw spring-boot:run
+	../mvnw spring-boot:run
 ```
 
 You can then access petclinic here: http://localhost:8080/
