@@ -5,9 +5,8 @@
 
 ## Running petclinic locally
 ```
-	git clone https://github.com/spring-projects/spring-petclinic.git
+	git clone https://github.com/spring-petclinic/spring-petclinic-angular1.git
 	cd spring-petclinic
-	git checkout angularjs
 	./mvnw clean install
 	cd spring-petclinic-server
 	./mvnw spring-boot:run
