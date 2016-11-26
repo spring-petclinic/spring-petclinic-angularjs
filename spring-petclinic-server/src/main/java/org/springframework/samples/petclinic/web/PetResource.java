@@ -49,15 +49,6 @@ public class PetResource extends AbstractResourceController {
         return clinicService.findPetTypes();
     }
 
-    @GetMapping("/owners/{ownerId}/pets/new")
-    public String initCreationForm(@PathVariable("ownerId") int ownerId, Map<String, Object> model) {
-        Owner owner = this.clinicService.findOwnerById(ownerId);
-        Pet pet = new Pet();
-        owner.addPet(pet);
-        model.put("pet", pet);
-        return "pets/createOrUpdatePetForm";
-    }
-
     @PostMapping("/owners/{ownerId}/pets")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void processCreationForm(
