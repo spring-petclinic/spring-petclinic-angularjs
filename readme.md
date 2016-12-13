@@ -66,7 +66,7 @@ this SpringBoot AngularJS Petclinic is splitted in 2 modules - a client module a
 
 | Spring Boot Configuration     | Files |
 |-------------------------------|-------|
-| PetClinicApplication.java     | [mvc-view-config.xml](spring-petclinic-server/src/main/java/org/springframework/samples/petclinic/application/PetClinicApplication.java)  |
+| The Main Class                | [PetClinicApplication.java](spring-petclinic-server/src/main/java/org/springframework/samples/petclinic/PetClinicApplication.java)  |
 | Common properties file        | [application.properties](spring-petclinic-server/src/main/resources/application.properties)  |
 | Development properties file   | [application-dev.properties](spring-petclinic-server/src/main/resources/application-dev.properties)  |
 | Production properties file    | [application-prod.properties](spring-petclinic-server/src/main/resources/application-prod.properties)  |
