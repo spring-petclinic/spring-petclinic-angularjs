@@ -79,7 +79,7 @@ this SpringBoot AngularJS Petclinic is splitted in 2 modules - a client module a
 | Node and NPM      | [The frontend-maven-plugin plugin downloads/installs Node and NPM locally then runs Bower and Gulp](spring-petclinic-client/pom.xml)  |
 | Bower             | [JavaScript libraries are defined by the manifest file bower.json](spring-petclinic-client/bower.json)  |
 | Gulp              | [Tasks automated by Gulp: minify CSS and JS, generate CSS from LESS, copy other static resources](spring-petclinic-client/gulpfile.js)  |
-| Angular JS        | [app.js, controllers and templates](spring-petclinic-client/scripts/)  |
+| Angular JS        | [app.js, controllers and templates](spring-petclinic-client/src/scripts/)  |
 
 
 # Contributing
