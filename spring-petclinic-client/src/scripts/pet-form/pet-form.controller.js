@@ -47,12 +47,6 @@ angular.module('petForm')
 
             req.then(function () {
                 $state.go('ownerDetails', {ownerId: ownerId});
-            }, function (response) {
-                var error = response.data;
-                error.errors = error.errors || [];
-                alert(error.error + "\r\n" + error.errors.map(function (e) {
-                        return e.field + ": " + e.defaultMessage;
-                    }).join("\r\n"));
             });
         };
     }]);
