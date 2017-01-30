@@ -19,7 +19,7 @@ angular.module('visits')
             };
 
             $http.post(url, data).then(function () {
-                $state.go("owners", { ownerId: $stateParams.ownerId });
+                $state.go('ownerDetails', { ownerId: $stateParams.ownerId });
             }, function (response) {
                 var error = response.data;
                 alert(error.error + "\r\n" + error.errors.map(function (e) {

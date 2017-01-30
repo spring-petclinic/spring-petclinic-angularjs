@@ -46,7 +46,7 @@ angular.module('petForm')
             }
 
             req.then(function () {
-                $state.go("owners", {ownerId: ownerId});
+                $state.go('ownerDetails', {ownerId: ownerId});
             }, function (response) {
                 var error = response.data;
                 error.errors = error.errors || [];
