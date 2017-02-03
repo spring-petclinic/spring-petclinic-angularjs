@@ -54,6 +54,16 @@ git clone https://github.com/spring-projects/spring-petclinic.git
 File -> Import -> Maven -> Existing Maven project
 ```
 
+### Active the dev Spring profile
+
+In development mode, we recommand you yo use the ```dev``` Spring profile.
+Just add the following VM option:
+```
+-Dspring.profiles.active=dev
+```
+All static resources changes will be monitored by the embedded LiveReload server of Spring Boot Devtools.
+See [application-dev.properties](spring-petclinic-server/src/main/resources/application-dev.properties) for details.
+
 ## Client-side Architecture
 
 Compared to the [standard Petclinic based on JSP pages](https://github.com/spring-projects/spring-petclinic), 
