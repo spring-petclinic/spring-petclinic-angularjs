@@ -1,11 +1,11 @@
-# Spring Boot version of the Spring PetClinic Sample Application [![Build Status](https://travis-ci.org/spring-petclinic/spring-petclinic-angular1.svg?branch=master)](https://travis-ci.org/spring-petclinic/spring-petclinic-angular1/)
+# Spring Boot version of the Spring PetClinic Sample Application [![Build Status](https://travis-ci.org/spring-petclinic/spring-petclinic-angularjs.svg?branch=master)](https://travis-ci.org/spring-petclinic/spring-petclinic-angularjs/)
 
 ## Understanding the Spring Petclinic application with a few diagrams
 <a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
 
 ## Running petclinic locally
 ```
-	git clone https://github.com/spring-petclinic/spring-petclinic-angular1.git
+	git clone https://github.com/spring-petclinic/spring-petclinic-angularjs.git
 	cd spring-petclinic
 	./mvnw clean install
 	cd spring-petclinic-server
@@ -17,7 +17,7 @@ You can then access petclinic here: http://localhost:8080/
 <img width="782" alt="spring-petclinic" src="https://cloud.githubusercontent.com/assets/838318/19653851/61c1986a-9a16-11e6-8b94-03fd7f775bb3.png">
 
 ## In case you find a bug/suggested improvement for Spring Petclinic
-Our issue tracker is available here: https://github.com/spring-petclinic/spring-petclinic-angular1/issues
+Our issue tracker is available here: https://github.com/spring-petclinic/spring-petclinic-angularjs/issues
 
 ## Database configuration
 
@@ -94,7 +94,7 @@ this SpringBoot AngularJS Petclinic is splitted in 2 modules - a client module a
 
 # Contributing
 
-The [issue tracker](https://github.com/spring-petclinic/spring-petclinic-angular1/issues) is the preferred channel for bug reports, features requests and submitting pull requests.
+The [issue tracker](https://github.com/spring-petclinic/spring-petclinic-angularjs/issues) is the preferred channel for bug reports, features requests and submitting pull requests.
 
 For pull requests, editor preferences are available in the [editor config](https://github.com/spring-projects/spring-petclinic/blob/master/.editorconfig) for easy use in common text editors. Read more and download plugins at <http://editorconfig.org>.
 
