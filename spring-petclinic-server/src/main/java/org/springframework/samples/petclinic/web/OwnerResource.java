@@ -62,7 +62,7 @@ public class OwnerResource extends AbstractResourceController {
     /**
      * Create Owner
      */
-    @RequestMapping(value = "/owner", method = RequestMethod.POST)
+    @RequestMapping(value = "/owners", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void createOwner(@Valid @RequestBody Owner owner) {
     	this.clinicService.saveOwner(owner);
@@ -71,7 +71,7 @@ public class OwnerResource extends AbstractResourceController {
     /**
      * Read single Owner
      */
-    @RequestMapping(value = "/owner/{ownerId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/owners/{ownerId}", method = RequestMethod.GET)
     public Owner findOwner(@PathVariable("ownerId") int ownerId) {
         return retrieveOwner(ownerId);
     }
@@ -79,7 +79,7 @@ public class OwnerResource extends AbstractResourceController {
     /**
      * Read List of Owners
      */
-    @GetMapping("/owner/list")
+    @GetMapping("/owners/list")
     public Collection<Owner> findAll() {
         return clinicService.findAll();
     }
@@ -87,7 +87,7 @@ public class OwnerResource extends AbstractResourceController {
     /**
      * Update Owner
      */
-    @RequestMapping(value = "/owner/{ownerId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/owners/{ownerId}", method = RequestMethod.PUT)
     public Owner updateOwner(@PathVariable("ownerId") int ownerId, @Valid @RequestBody Owner ownerRequest) {
     	Owner ownerModel = retrieveOwner(ownerId);
     	// This is done by hand for simplicity purpose. In a real life use-case we should consider using MapStruct.

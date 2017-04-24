@@ -26,6 +26,8 @@ import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Size;
+
+import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
@@ -45,7 +47,7 @@ public class PetResource extends AbstractResourceController {
     }
 
     @GetMapping("/petTypes")
-    Object getPetTypes() {
+    Collection<PetType> getPetTypes() {
         return clinicService.findPetTypes();
     }
 
@@ -82,7 +84,7 @@ public class PetResource extends AbstractResourceController {
         clinicService.savePet(pet);
     }
 
-    @GetMapping("/owner/*/pet/{petId}")
+    @GetMapping("/owners/*/pets/{petId}")
     public PetDetails findPet(@PathVariable("petId") int petId) {
         Pet pet = this.clinicService.findPetById(petId);
         return new PetDetails(pet);
@@ -131,7 +133,7 @@ public class PetResource extends AbstractResourceController {
 
     static class PetDetails {
 
-        long id;
+        int id;
         String name;
         String owner;
         @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -146,7 +148,7 @@ public class PetResource extends AbstractResourceController {
             this.type = pet.getType();
         }
 
-        public long getId() {
+        public int getId() {
             return id;
         }
 

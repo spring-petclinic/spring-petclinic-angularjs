@@ -37,7 +37,7 @@ public class PetResourceTests {
         given(clinicService.findPetById(2)).willReturn(pet);
 
 
-        mvc.perform(get("/owner/2/pet/2.json").accept(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/owners/2/pets/2.json").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$.id").value(2))
