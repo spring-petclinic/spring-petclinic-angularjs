@@ -12,13 +12,13 @@ angular.module('petForm')
             var petId = $stateParams.petId || 0;
 
             if (petId) { // edit
-                $http.get("owner/" + ownerId + "/pet/" + petId).then(function (resp) {
+                $http.get("owners/" + ownerId + "/pets/" + petId).then(function (resp) {
                     self.pet = resp.data;
                     self.pet.birthDate = new Date(self.pet.birthDate);
                     self.petTypeId = "" + self.pet.type.id;
                 });
             } else {
-                $http.get('owner/' + ownerId).then(function (resp) {
+                $http.get('owners/' + ownerId).then(function (resp) {
                     self.pet = {
                         owner: resp.data.firstName + " " + resp.data.lastName
                     };
