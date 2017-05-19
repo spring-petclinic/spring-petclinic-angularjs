@@ -17,9 +17,9 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.5.8",
+    "angular": "~1.6.4",
     "bootstrap": "components/bootstrap#~3.3.7",
-    "jquery": "components/jquery#~3.1.0",
-    "angular-ui-router": "ui-router#^0.3.2"
+    "jquery": "components/jquery#~3.2.1",
+    "angular-ui-router": "ui-router#^1.0.3"
   }
 }
