@@ -59,7 +59,7 @@ public class ClinicServiceImpl implements ClinicService {
     @Override
     @Transactional(readOnly = true)
     public Owner findOwnerById(int id) throws DataAccessException {
-        return ownerRepository.findOne(id);
+        return ownerRepository.findById(id).get();
     }
 
     @Transactional(readOnly = true)
