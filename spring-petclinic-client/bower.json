@@ -20,6 +20,6 @@
     "angular": "~1.6.4",
     "bootstrap": "components/bootstrap#~3.3.7",
     "jquery": "components/jquery#~3.2.1",
-    "angular-ui-router": "ui-router#^1.0.3"
+    "angular-ui-router": "angular-ui-router#^1.0.3"
   }
 }
