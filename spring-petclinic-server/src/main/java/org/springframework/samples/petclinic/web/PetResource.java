@@ -29,7 +29,6 @@ import javax.validation.constraints.Size;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.Map;
 
 /**
  * @author Juergen Hoeller
