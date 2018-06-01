@@ -132,12 +132,12 @@ public class PetResource extends AbstractResourceController {
 
     static class PetDetails {
 
-        int id;
-        String name;
-        String owner;
+        final int id;
+        final String name;
+        final String owner;
         @DateTimeFormat(pattern = "yyyy-MM-dd")
-        Date birthDate;
-        PetType type;
+        final Date birthDate;
+        final PetType type;
 
         PetDetails(Pet pet) {
             this.id = pet.getId();
