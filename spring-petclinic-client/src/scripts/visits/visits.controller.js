@@ -2,9 +2,9 @@
 
 angular.module('visits')
     .controller('VisitsController', ['$http', '$state', '$stateParams', '$filter', function ($http, $state, $stateParams, $filter) {
-        const self = this;
-        const petId = $stateParams.petId || 0;
-        const url = "owners/" + ($stateParams.ownerId || 0) + "/pets/" + petId + "/visits";
+        var self = this;
+        var petId = $stateParams.petId || 0;
+        var url = "owners/" + ($stateParams.ownerId || 0) + "/pets/" + petId + "/visits";
         self.date = new Date();
         self.desc = "";
 
@@ -13,7 +13,7 @@ angular.module('visits')
         });
 
         self.submit = function () {
-            const data = {
+            var data = {
                 date: $filter('date')(self.date, "yyyy-MM-dd"),
                 description: self.desc
             };

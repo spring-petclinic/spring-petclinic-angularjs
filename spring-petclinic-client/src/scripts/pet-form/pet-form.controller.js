@@ -2,14 +2,14 @@
 
 angular.module('petForm')
     .controller('PetFormController', ['$http', '$state', '$stateParams', function ($http, $state, $stateParams) {
-        const self = this;
-        const ownerId = $stateParams.ownerId || 0;
+        var self = this;
+        var ownerId = $stateParams.ownerId || 0;
 
         $http.get('petTypes').then(function (resp) {
             self.types = resp.data;
         }).then(function () {
 
-            const petId = $stateParams.petId || 0;
+            var petId = $stateParams.petId || 0;
 
             if (petId) { // edit
                 $http.get("owners/" + ownerId + "/pets/" + petId).then(function (resp) {
@@ -29,16 +29,16 @@ angular.module('petForm')
         });
 
         self.submit = function () {
-            const id = self.pet.id || 0;
+            var id = self.pet.id || 0;
 
-            const data = {
+            var data = {
                 id: id,
                 name: self.pet.name,
                 birthDate: self.pet.birthDate,
                 typeId: self.petTypeId
             };
 
-            let req;
+            var req;
             if (id) {
                 req = $http.put("owners/" + ownerId + "/pets/" + id, data);
             } else {
