@@ -26,25 +26,25 @@ import org.springframework.validation.Errors;
  * @author Juergen Hoeller
  */
 public class PetValidator {
+    private static final String REQUIRED = "required";
 
     public void validate(Pet pet, Errors errors) {
         String name = pet.getName();
         // name validation
-        final String required = "required";
         if (!StringUtils.hasLength(name)) {
-            errors.rejectValue("name", required, required);
+            errors.rejectValue("name", REQUIRED, REQUIRED);
         } else if (pet.isNew() && pet.getOwner().getPet(name, true) != null) {
             errors.rejectValue("name", "duplicate", "already exists");
         }
 
         // type validation
         if (pet.isNew() && pet.getType() == null) {
-            errors.rejectValue("type", required, required);
+            errors.rejectValue("type", REQUIRED, REQUIRED);
         }
 
         // birth date validation
         if (pet.getBirthDate() == null) {
-            errors.rejectValue("birthDate", required, required);
+            errors.rejectValue("birthDate", REQUIRED, REQUIRED);
         }
     }
 
