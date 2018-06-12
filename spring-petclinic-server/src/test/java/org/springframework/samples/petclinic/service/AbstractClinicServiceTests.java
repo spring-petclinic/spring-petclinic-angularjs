@@ -59,11 +59,11 @@ public abstract class AbstractClinicServiceTests {
         assertThat(owner.getLastName()).startsWith("Franklin");
         assertThat(owner.getPets().size()).isEqualTo(1);
     }
-    
+
     @Test
     public void shouldReturnAllOwnersInCaseLastNameIsEmpty() {
         Collection<Owner> owners = this.clinicService.findAll();
-        assertThat(owners).extracting("lastName").contains("Davis", "Franklin");        
+        assertThat(owners).extracting("lastName").contains("Davis", "Franklin");
     }
 
     @Test
@@ -71,7 +71,7 @@ public abstract class AbstractClinicServiceTests {
     public void shouldInsertOwner() {
         Collection<Owner> owners = this.clinicService.findAll();
         int found = owners.size();
-        
+
         Owner owner = new Owner();
         owner.setFirstName("Sam");
         owner.setLastName("Schultz");
@@ -91,7 +91,7 @@ public abstract class AbstractClinicServiceTests {
         Owner owner = this.clinicService.findOwnerById(1);
         String oldLastName = owner.getLastName();
         String newLastName = oldLastName + "X";
-        
+
         owner.setLastName(newLastName);
         this.clinicService.saveOwner(owner);
 
@@ -105,13 +105,13 @@ public abstract class AbstractClinicServiceTests {
 	    Pet pet7 = this.clinicService.findPetById(7);
 	    assertThat(pet7.getName()).startsWith("Samantha");
 	    assertThat(pet7.getOwner().getFirstName()).isEqualTo("Jean");
-	    
+
 	}
 
 	@Test
 	public void shouldFindAllPetTypes() {
 	    Collection<PetType> petTypes = this.clinicService.findPetTypes();
-	
+
 	    PetType petType1 = EntityUtils.getById(petTypes, PetType.class, 1);
 	    assertThat(petType1.getName()).isEqualTo("cat");
 	    PetType petType4 = EntityUtils.getById(petTypes, PetType.class, 4);
@@ -123,7 +123,7 @@ public abstract class AbstractClinicServiceTests {
 	public void shouldInsertPetIntoDatabaseAndGenerateId() {
 	    Owner owner6 = this.clinicService.findOwnerById(6);
 	    int found = owner6.getPets().size();
-	    
+
 	    Pet pet = new Pet();
 	    pet.setName("bowser");
 	    Collection<PetType> types = this.clinicService.findPetTypes();
@@ -131,10 +131,10 @@ public abstract class AbstractClinicServiceTests {
 	    pet.setBirthDate(new Date());
 	    owner6.addPet(pet);
 	    assertThat(owner6.getPets().size()).isEqualTo(found + 1);
-	    
+
 	    this.clinicService.savePet(pet);
 	    this.clinicService.saveOwner(owner6);
-	    
+
 	    owner6 = this.clinicService.findOwnerById(6);
 	    assertThat(owner6.getPets().size()).isEqualTo(found + 1);
 	    // checks that id has been generated
@@ -143,10 +143,10 @@ public abstract class AbstractClinicServiceTests {
 
 	@Test
 	@Transactional
-	public void shouldUpdatePetName() throws Exception {
+	public void shouldUpdatePetName() {
 	    Pet pet7 = this.clinicService.findPetById(7);
 	    String oldName = pet7.getName();
-	    
+
 	    String newName = oldName + "X";
 		pet7.setName(newName);
 	    this.clinicService.savePet(pet7);
@@ -158,7 +158,7 @@ public abstract class AbstractClinicServiceTests {
 	@Test
 	public void shouldFindVets() {
 	    Collection<Vet> vets = this.clinicService.findVets();
-	
+
 	    Vet vet = EntityUtils.getById(vets, Vet.class, 3);
 	    assertThat(vet.getLastName()).isEqualTo("Douglas");
 	    assertThat(vet.getNrOfSpecialties()).isEqualTo(2);
@@ -173,7 +173,7 @@ public abstract class AbstractClinicServiceTests {
 	    int found = pet7.getVisits().size();
 	    Visit visit = new Visit();
 	    pet7.addVisit(visit);
-	    visit.setDescription("test");	    
+	    visit.setDescription("test");
 	    this.clinicService.saveVisit(visit);
 	    this.clinicService.savePet(pet7);
 

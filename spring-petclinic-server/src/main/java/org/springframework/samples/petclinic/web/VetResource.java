@@ -18,12 +18,9 @@ package org.springframework.samples.petclinic.web;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -41,7 +38,7 @@ public class VetResource extends AbstractResourceController {
     public VetResource(ClinicService clinicService) {
         this.clinicService = clinicService;
     }
-    
+
     @GetMapping("/vets")
     public Collection<Vet> showResourcesVetList() {
         return this.clinicService.findVets();
