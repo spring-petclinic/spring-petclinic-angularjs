@@ -92,6 +92,16 @@ this SpringBoot AngularJS Petclinic is splitted in 2 modules - a client module a
 | Angular JS        | [app.js, controllers and templates](spring-petclinic-client/src/scripts/)  |
 
 
+## Interesting Spring Petclinic forks
+
+The Spring Petclinic master branch in the main [spring-projects](https://github.com/spring-projects/spring-petclinic)
+GitHub org is the "canonical" implementation, currently based on Spring Boot and Thymeleaf.
+
+This [spring-petclinic-angularjs][] project is one of the [several forks](https://spring-petclinic.github.io/docs/forks.html) 
+hosted in a special GitHub org: [spring-petclinic](https://github.com/spring-petclinic).
+If you have a special interest in a different technology stack
+that could be used to implement the Pet Clinic then please join the community there.
+
 # Contributing
 
 The [issue tracker](https://github.com/spring-petclinic/spring-petclinic-angularjs/issues) is the preferred channel for bug reports, features requests and submitting pull requests.
