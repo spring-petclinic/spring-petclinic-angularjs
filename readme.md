@@ -1,7 +1,7 @@
 # AngularJS and Spring Boot version of the Spring PetClinic Sample Application [![Build Status](https://travis-ci.org/spring-petclinic/spring-petclinic-angularjs.svg?branch=master)](https://travis-ci.org/spring-petclinic/spring-petclinic-angularjs/)
 
 ## Understanding the Spring Petclinic application with a few diagrams
-<a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
+[See the presentation here](http://fr.slideshare.net/AntoineRey/spring-framework-petclinic-sample-application)
 
 ## Running petclinic locally
 ```
