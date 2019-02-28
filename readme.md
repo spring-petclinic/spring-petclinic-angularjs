@@ -21,14 +21,32 @@ Our issue tracker is available here: https://github.com/spring-petclinic/spring-
 
 ## Database configuration
 
-In its default configuration, Petclinic uses an in-memory database (HSQLDB) which
-gets populated at startup with data. A similar setup is provided for MySql in case a persistent database configuration is needed.
-Note that whenever the database type is changed, the data-access.properties file needs to be updated and the mysql-connector-java artifact from the pom.xml needs to be uncommented.
+In its default configuration, Petclinic uses an in-memory database (HSQLDB) which gets populated at startup with data.
+A similar setups is provided for MySql in case a persistent database configuration is needed.
+To run petclinic locally using MySQL database, it is needed to change profile defined in application.properties file.
 
-You may start a MySql database with docker:
+For MySQL database, it is needed to switch profile. There is two ways:
+
+1. Update application properties: open the `application.properties` file, then change the value `hsqldb` to `mysql`
+2. Use a Spring Boot JVM parameter: simply start the JVM with the `-Dspring.profiles.active=mysql.prod` parameter.
+
+
+Before do this, would be good to check properties defined in `application-mysql.properties` file.
 
 ```
-docker run -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -p 3306:3306 mysql:5.7.8
+spring.datasource.url = jdbc:mysql://localhost:3306/petclinic?useUnicode=true
+spring.datasource.username=pc
+spring.datasource.password=petclinic 
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.database=MYSQL
+spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
+spring.jpa.hibernate.ddl-auto=none
+```      
+
+You may also start a MySql database with docker:
+
+```
+docker run --name mysql-petclinic -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -p 3306:3306 mysql:5.7
 ```
 
 ## Working with Petclinic in Eclipse/STS
