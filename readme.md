@@ -5,11 +5,11 @@
 
 ## Running petclinic locally
 ```
-	git clone https://github.com/spring-petclinic/spring-petclinic-angularjs.git
-	cd spring-petclinic-angularjs
-	./mvnw clean install
-	cd spring-petclinic-server
-	../mvnw spring-boot:run
+git clone https://github.com/spring-petclinic/spring-petclinic-angularjs.git
+cd spring-petclinic-angularjs
+./mvnw clean install
+cd spring-petclinic-server
+../mvnw spring-boot:run
 ```
 
 You can then access petclinic here: http://localhost:8080/
@@ -23,7 +23,7 @@ Our issue tracker is available here: https://github.com/spring-petclinic/spring-
 
 In its default configuration, Petclinic uses an in-memory database (HSQLDB) which gets populated at startup with data.
 A similar setups is provided for MySql in case a persistent database configuration is needed.
-To run petclinic locally using MySQL database, it is needed to change profile defined in application.properties file.
+To run petclinic locally using MySQL database, it is needed to change profile defined in the  application.properties` file.
 
 For MySQL database, it is needed to switch profile. There is two ways:
 
@@ -31,22 +31,60 @@ For MySQL database, it is needed to switch profile. There is two ways:
 2. Use a Spring Boot JVM parameter: simply start the JVM with the `-Dspring.profiles.active=mysql.prod` parameter.
 
 
-Before do this, would be good to check properties defined in `application-mysql.properties` file.
+Before do this, it would be good to change JDBC url properties defined in the `application-mysql.properties` file:
 
 ```
 spring.datasource.url = jdbc:mysql://localhost:3306/petclinic?useUnicode=true
-spring.datasource.username=pc
+spring.datasource.username=root
 spring.datasource.password=petclinic 
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.jpa.database=MYSQL
-spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
-spring.jpa.hibernate.ddl-auto=none
 ```      
 
+The `localhost` host should be set for a MySQL dabase instance started on your local machine.
 You may also start a MySql database with docker:
 
 ```
 docker run --name mysql-petclinic -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -p 3306:3306 mysql:5.7
+```
+
+
+## Docker
+
+### Run an image
+
+To run a Docker image of Petclinic with its embedded HSQL database, you may 
+
+```
+docker run -p 8080:8080 -t --name springboot-petclinic arey/springboot-petclinic
+```
+
+If you want to use MySQL, you first have to change the `spring.datasource.url` declared in the `application-mysql.properties` file.
+You have to rebuild the image (see next section).
+Then you could activated the `mysql` profile:
+
+```
+docker run -e "SPRING_PROFILES_ACTIVE=mysql,prod" -p 8080:8080 -t --name springboot-petclinic arey/springboot-petclinic
+```
+
+### Use Docker Compose
+
+The simplest way is to use docker-compose
+
+```
+docker-compose up
+```
+
+### Build an image
+
+To rebuild a Docker image on your device:
+```
+./mvnw clean install
+cd spring-petclinic-server
+mvn clean package docker:build
+```
+
+To publish a new image into Docker Hub:
+```
+mvn clean package docker:build -DpushImageTag
 ```
 
 ## Working with Petclinic in Eclipse/STS

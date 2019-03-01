@@ -1,0 +1,24 @@
+version: '2'
+services:
+  mysql-petclinic:
+    image: mysql:5.7
+    container_name: mysql-petclinic
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=petclinic
+      - MYSQL_DATABASE=petclinic
+    volumes:
+      - "./conf.d:/etc/mysql/conf.d:ro"
+
+
+  spring-petclinic:
+    image: arey/springboot-petclinic
+    container_name: spring-petclinic
+    mem_limit: 512M
+    depends_on:
+      - mysql-petclinic
+    ports:
+     - 8080:8080
+    environment:
+     - SPRING_PROFILES_ACTIVE=mysql,prod
