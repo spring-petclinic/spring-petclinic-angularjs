@@ -29,7 +29,7 @@ angular.module('petForm')
         });
 
         self.submit = function () {
-            var id = self.pet.id || 0;
+            var id = self.pet.id || undefined;
 
             var data = {
                 id: id,

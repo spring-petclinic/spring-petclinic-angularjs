@@ -15,7 +15,13 @@
  */
 package org.springframework.samples.petclinic.web;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.Collection;
+import java.util.Date;
+
+import javax.validation.constraints.Size;
+
+import org.hdiv.services.SecureIdentifiable;
+import org.hdiv.services.TrustAssertion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -23,13 +29,15 @@ import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.service.ClinicService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.Size;
-
-import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * @author Juergen Hoeller
@@ -39,134 +47,158 @@ import java.util.Map;
 @RestController
 public class PetResource extends AbstractResourceController {
 
-    private final ClinicService clinicService;
+	private final ClinicService clinicService;
 
-    @Autowired
-    public PetResource(ClinicService clinicService) {
-        this.clinicService = clinicService;
-    }
+	@Autowired
+	public PetResource(final ClinicService clinicService) {
+		this.clinicService = clinicService;
+	}
 
-    @GetMapping("/petTypes")
-    Collection<PetType> getPetTypes() {
-        return clinicService.findPetTypes();
-    }
+	@GetMapping("/petTypes")
+	Collection<PetType> getPetTypes() {
+		return clinicService.findPetTypes();
+	}
 
-    @PostMapping("/owners/{ownerId}/pets")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void processCreationForm(
-            @RequestBody PetRequest petRequest,
-            @PathVariable("ownerId") int ownerId) {
+	@PostMapping("/owners/{ownerId}/pets")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void processCreationForm(
+			@RequestBody final PetRequest petRequest,
+			@PathVariable("ownerId") final int ownerId) {
 
-        Pet pet = new Pet();
-        Owner owner = this.clinicService.findOwnerById(ownerId);
-        owner.addPet(pet);
+		Pet pet = new Pet();
+		Owner owner = clinicService.findOwnerById(ownerId);
+		owner.addPet(pet);
 
-        save(pet, petRequest);
-    }
+		save(pet, petRequest);
+	}
 
-    @PutMapping("/owners/{ownerId}/pets/{petId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void processUpdateForm(@RequestBody PetRequest petRequest) {
-        save(clinicService.findPetById(petRequest.getId()), petRequest);
-    }
+	@PutMapping("/owners/{ownerId}/pets/{petId}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void processUpdateForm(@RequestBody final PetRequest petRequest) {
+		save(clinicService.findPetById(petRequest.getId()), petRequest);
+	}
 
-    private void save(Pet pet, PetRequest petRequest) {
+	private void save(final Pet pet, final PetRequest petRequest) {
 
-        pet.setName(petRequest.getName());
-        pet.setBirthDate(petRequest.getBirthDate());
+		pet.setName(petRequest.getName());
+		pet.setBirthDate(petRequest.getBirthDate());
 
-        for (PetType petType : clinicService.findPetTypes()) {
-            if (petType.getId() == petRequest.getTypeId()) {
-                pet.setType(petType);
-            }
-        }
+		for (PetType petType : clinicService.findPetTypes()) {
+			if (petType.getId() == petRequest.getTypeId()) {
+				pet.setType(petType);
+			}
+		}
 
-        clinicService.savePet(pet);
-    }
+		clinicService.savePet(pet);
+	}
 
-    @GetMapping("/owners/*/pets/{petId}")
-    public PetDetails findPet(@PathVariable("petId") int petId) {
-        Pet pet = this.clinicService.findPetById(petId);
-        return new PetDetails(pet);
-    }
+	@GetMapping("/owners/*/pets/{petId}")
+	public PetDetails findPet(@PathVariable("petId") final int petId) {
+		Pet pet = clinicService.findPetById(petId);
+		return new PetDetails(pet);
+	}
 
-    static class PetRequest {
-        int id;
-        @JsonFormat(pattern = "yyyy-MM-dd")
-        Date birthDate;
-        @Size(min = 1)
-        String name;
-        int typeId;
+	static class PetRequest implements SecureIdentifiable<Integer> {
 
-        public int getId() {
-            return id;
-        }
+		@TrustAssertion(idFor = Pet.class)
+		private int id;
 
-        public void setId(int id) {
-            this.id = id;
-        }
+		@Override
+		public Integer getId() {
+			return id;
+		}
 
-        public Date getBirthDate() {
-            return birthDate;
-        }
+		@JsonFormat(pattern = "yyyy-MM-dd")
+		Date birthDate;
 
-        public void setBirthDate(Date birthDate) {
-            this.birthDate = birthDate;
-        }
+		@Size(min = 1)
+		String name;
 
-        public String getName() {
-            return name;
-        }
+		@TrustAssertion(idFor = PetType.class)
+		int typeId;
 
-        public void setName(String name) {
-            this.name = name;
-        }
+		public void setId(final int id) {
+			this.id = id;
+		}
 
-        public int getTypeId() {
-            return typeId;
-        }
+		public Date getBirthDate() {
+			return birthDate;
+		}
 
-        public void setTypeId(int typeId) {
-            this.typeId = typeId;
-        }
-    }
+		public void setBirthDate(final Date birthDate) {
+			this.birthDate = birthDate;
+		}
 
-    static class PetDetails {
+		public String getName() {
+			return name;
+		}
 
-        int id;
-        String name;
-        String owner;
-        @DateTimeFormat(pattern = "yyyy-MM-dd")
-        Date birthDate;
-        PetType type;
+		public void setName(final String name) {
+			this.name = name;
+		}
 
-        PetDetails(Pet pet) {
-            this.id = pet.getId();
-            this.name = pet.getName();
-            this.owner = pet.getOwner().getFirstName() + " " + pet.getOwner().getLastName();
-            this.birthDate = pet.getBirthDate();
-            this.type = pet.getType();
-        }
+		public int getTypeId() {
+			return typeId;
+		}
 
-        public int getId() {
-            return id;
-        }
+		public void setTypeId(final int typeId) {
+			this.typeId = typeId;
+		}
+	}
 
-        public String getName() {
-            return name;
-        }
+	static class PetDetails implements SecureIdentifiable<Integer> {
+		@TrustAssertion(idFor = Pet.class)
+		private int id;
 
-        public String getOwner() {
-            return owner;
-        }
+		@Override
+		public Integer getId() {
+			return id;
+		}
 
-        public Date getBirthDate() {
-            return birthDate;
-        }
+		String name;
 
-        public PetType getType() {
-            return type;
-        }
-    }
+		String owner;
+
+		@DateTimeFormat(pattern = "yyyy-MM-dd")
+		Date birthDate;
+
+		PetType type;
+
+		PetDetails() {
+		}
+
+		PetDetails(final Pet pet) {
+			id = pet.getId();
+			name = pet.getName();
+			owner = pet.getOwner().getFirstName() + " " + pet.getOwner().getLastName();
+			birthDate = pet.getBirthDate();
+			type = pet.getType();
+		}
+
+		public PetRequest map(final Class<PetRequest> destinationClass) {
+			PetRequest request = new PetRequest();
+			request.setId(id);
+			request.setBirthDate(birthDate);
+			request.setName(name);
+			request.setTypeId(type.getId());
+			return request;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public String getOwner() {
+			return owner;
+		}
+
+		public Date getBirthDate() {
+			return birthDate;
+		}
+
+		public PetType getType() {
+			return type;
+		}
+	}
 
 }

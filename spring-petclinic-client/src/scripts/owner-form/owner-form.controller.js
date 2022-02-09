@@ -18,6 +18,7 @@ angular.module('ownerForm')
             var id = self.owner.id;
 
             if (id) {
+            	delete self.owner.pets;
                 $http.put('owners/' + id, self.owner).then(function () {
                     $state.go('ownerDetails', {ownerId: ownerId});
                 });

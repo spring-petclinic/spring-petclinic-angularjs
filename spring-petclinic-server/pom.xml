@@ -84,6 +84,11 @@
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.hdivsecurity</groupId>
+            <artifactId>hdiv-for-services</artifactId>
+            <version>2.6.3</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -94,6 +99,13 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <fork>true</fork>
+                    <jvmArguments>
+                        -Dhdiv.config.dir=../../config
+                        -Dhdiv.server.name=petclinic-server
+                        -Dhdiv.console.token=6a367E2eb97db59020a47340
+                        -Dhdiv.console.url="http://localhost:8180/hdiv-console-services"
+                        -Dhdiv.root.app.name=petclinic-app
+                    </jvmArguments>
                 </configuration>
                 <executions>
                     <execution>
