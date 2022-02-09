@@ -20,8 +20,6 @@ import java.util.Date;
 
 import javax.validation.constraints.Size;
 
-import org.hdiv.services.SecureIdentifiable;
-import org.hdiv.services.TrustAssertion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -98,12 +96,10 @@ public class PetResource extends AbstractResourceController {
 		return new PetDetails(pet);
 	}
 
-	static class PetRequest implements SecureIdentifiable<Integer> {
+	static class PetRequest {
 
-		@TrustAssertion(idFor = Pet.class)
 		private int id;
 
-		@Override
 		public Integer getId() {
 			return id;
 		}
@@ -114,7 +110,6 @@ public class PetResource extends AbstractResourceController {
 		@Size(min = 1)
 		String name;
 
-		@TrustAssertion(idFor = PetType.class)
 		int typeId;
 
 		public void setId(final int id) {
@@ -146,11 +141,9 @@ public class PetResource extends AbstractResourceController {
 		}
 	}
 
-	static class PetDetails implements SecureIdentifiable<Integer> {
-		@TrustAssertion(idFor = Pet.class)
+	static class PetDetails {
 		private int id;
 
-		@Override
 		public Integer getId() {
 			return id;
 		}
