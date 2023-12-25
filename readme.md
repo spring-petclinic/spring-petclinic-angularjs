@@ -4,6 +4,7 @@
 [See the presentation here](http://fr.slideshare.net/AntoineRey/spring-framework-petclinic-sample-application)
 
 ## Running petclinic locally
+
 ```
 git clone https://github.com/spring-petclinic/spring-petclinic-angularjs.git
 cd spring-petclinic-angularjs
