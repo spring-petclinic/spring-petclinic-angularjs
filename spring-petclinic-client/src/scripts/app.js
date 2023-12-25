@@ -6,7 +6,7 @@ var petClinicApp = angular.module('petClinicApp', [
 
 petClinicApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', function(
     $stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-
+    console.log("Secret");
     // safari turns to be lazy sending the Cache-Control header
     $httpProvider.defaults.headers.common["Cache-Control"] = 'no-cache';
     $httpProvider.interceptors.push('HttpErrorHandlingInterceptor');
