@@ -13,6 +13,7 @@
 	<properties>
 		<node.version>v4.4.3</node.version>
 		<npm.version>2.15.1</npm.version>
+        <sonar.sources>src</sonar.sources>
 	</properties>
 
 	<build>
