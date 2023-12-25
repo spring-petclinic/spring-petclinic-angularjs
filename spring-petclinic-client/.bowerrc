@@ -1,5 +1,5 @@
 {
   "registry": "https://registry.bower.io"
 "strict-ssl": false,
-"https-proxy": "",
+"https-proxy": ""
 }
